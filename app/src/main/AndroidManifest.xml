@@ -23,7 +23,51 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".DashboardActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MessMenuActivity"
+            android:label="@string/title_activity_mess_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TimeTableActivity"
+            android:label="@string/title_activity_time_table"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NotificationsActivity"
+            android:label="@string/title_activity_notifications"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FacultyActivity"
+            android:label="@string/title_activity_faculty"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DirectoryActivity"
+            android:label="@string/title_activity_directory"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SilencioActivity"
+            android:label="@string/title_activity_silencio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlacementActivity"
+            android:label="@string/title_activity_placement"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewPagerTimeTableActivity"
+            android:label="@string/title_activity_view_pager_time_table"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DirectoryNumbersActivity"
+            android:label="@string/title_activity_directory_numbers"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewPagerMessMenuActivity"
+            android:label="@string/title_activity_view_pager_mess_menu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
