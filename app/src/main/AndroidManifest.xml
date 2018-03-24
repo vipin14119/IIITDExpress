@@ -41,7 +41,7 @@
             android:label="@string/title_activity_notifications"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FacultyActivity"
+            android:name=".faculty.FacultyActivity"
             android:label="@string/title_activity_faculty"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

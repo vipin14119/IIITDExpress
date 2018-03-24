@@ -277,7 +277,7 @@
                     android:elevation="4dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-
+                    android:onClick="startActivityFaculty"
                     android:translationZ="5dp"
                     card_view:cardCornerRadius="2dp">
                     <ImageView
