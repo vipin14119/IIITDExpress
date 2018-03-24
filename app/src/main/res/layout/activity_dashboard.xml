@@ -24,31 +24,32 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:textColor="#FFF"
                 android:fontFamily="sans-serif-condensed"
                 android:text="22º C"
-                android:textStyle="bold"
                 android:textAlignment="center"
-                android:textSize="50dp" />
+                android:textColor="#FFF"
+                android:textSize="50dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/temprature"
-                android:textColor="#FFF"
-                android:textSize="18dp"
                 android:layout_centerHorizontal="true"
-                android:text="IIIT Delhi" />
+                android:text="IIIT Delhi"
+                android:textColor="#FFF"
+                android:textSize="18dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/location"
+                android:layout_centerHorizontal="true"
+                android:text="10 March 2018"
                 android:textColor="#FFF"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:text="10 March 2018" />
+                android:textStyle="bold" />
         </RelativeLayout>
         <!-- Mess , Timetable and Silencio -->
         <RelativeLayout
@@ -65,63 +66,82 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2">
 
-                    <LinearLayout
+                    <android.support.v7.widget.CardView
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorCyan"
-                        android:onClick="startActivityTimeTable"
-                        android:orientation="vertical">
+                        android:backgroundTint="@color/colorCyan"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:stateListAnimator="@animator/lift_on_touch"
+                        android:elevation="4dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
 
+                        android:translationZ="5dp"
+                        card_view:cardCornerRadius="2dp">
                         <ImageView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_marginTop="10dp"
                             android:src="@drawable/icon_calendar" />
-                    </LinearLayout>
 
-                    <LinearLayout
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorCyan"
-                        android:onClick="startActivityMessMenu"
-                        android:orientation="vertical">
+                        android:backgroundTint="@color/colorCyan"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:stateListAnimator="@animator/lift_on_touch"
+                        android:elevation="4dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
 
+                        android:translationZ="5dp"
+                        card_view:cardCornerRadius="2dp">
                         <ImageView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_marginTop="10dp"
                             android:src="@drawable/icon_mess" />
-                    </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginLeft="5dp"
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_weight="1"
-                    android:background="@color/colorCyan"
-                    android:onClick="startActivitySilencio"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:backgroundTint="@color/colorCyan"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:stateListAnimator="@animator/lift_on_touch"
+                    android:elevation="4dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
 
+                    android:translationZ="5dp"
+                    card_view:cardCornerRadius="2dp">
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
-                        android:src="@drawable/icon_silencio" />
-                </LinearLayout>
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:src="@drawable/icon_silencio"/>
 
+                </android.support.v7.widget.CardView>
             </LinearLayout>
         </RelativeLayout>
 
