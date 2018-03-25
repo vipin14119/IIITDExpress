@@ -1,4 +1,4 @@
-package com.dhcs.vipin.iiitdexpress;
+package com.dhcs.vipin.iiitdexpress.timetable;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.dhcs.vipin.iiitdexpress.R;
+import com.dhcs.vipin.iiitdexpress.timetable.ListFragment;
 
 public class ViewPagerTimeTableActivity extends AppCompatActivity {
 
@@ -139,6 +142,9 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            if(position == 0){
+                return new ListFragment();
+            }
             return PlaceholderFragment.newInstance(position + 1);
         }
 

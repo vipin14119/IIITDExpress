@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.dhcs.vipin.iiitdexpress.directory.DirectoryActivity;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
+import com.dhcs.vipin.iiitdexpress.timetable.ViewPagerTimeTableActivity;
 
 public class DashboardActivity extends AppCompatActivity {
 

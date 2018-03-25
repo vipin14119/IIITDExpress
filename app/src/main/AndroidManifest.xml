@@ -45,7 +45,7 @@
             android:label="@string/title_activity_faculty"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DirectoryActivity"
+            android:name=".directory.DirectoryActivity"
             android:label="@string/title_activity_directory"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -57,7 +57,7 @@
             android:label="@string/title_activity_placement"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ViewPagerTimeTableActivity"
+            android:name=".timetable.ViewPagerTimeTableActivity"
             android:label="@string/title_activity_view_pager_time_table"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

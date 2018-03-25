@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.dhcs.vipin.iiitdexpress.DirectoryActivity"
+    tools:context="com.dhcs.vipin.iiitdexpress.directory.DirectoryActivity"
     tools:showIn="@layout/activity_directory">
     <LinearLayout
         android:layout_width="match_parent"
