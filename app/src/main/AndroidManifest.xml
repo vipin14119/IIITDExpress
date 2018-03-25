@@ -67,6 +67,10 @@
         <activity
             android:name=".ViewPagerMessMenuActivity"
             android:label="@string/title_activity_view_pager_mess_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".directory.ViewPagerDirectoryActivity"
+            android:label="@string/title_activity_view_pager_directory"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

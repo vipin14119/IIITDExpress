@@ -33,4 +33,5 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_directory_numbers">Directory Numbers</string>
     <string name="title_activity_view_pager_mess_menu">ViewPagerMessMenuActivity</string>
+    <string name="title_activity_view_pager_directory">ViewPagerDirectoryActivity</string>
 </resources>

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.dhcs.vipin.iiitdexpress.directory.DirectoryActivity;
+import com.dhcs.vipin.iiitdexpress.directory.ViewPagerDirectoryActivity;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
 import com.dhcs.vipin.iiitdexpress.timetable.ViewPagerTimeTableActivity;
 
@@ -34,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void startActivityDirectory(View view){
-        Intent intent = new Intent(this, DirectoryActivity.class);
+        Intent intent = new Intent(this, ViewPagerDirectoryActivity.class);
         startActivity(intent);
     }
 
