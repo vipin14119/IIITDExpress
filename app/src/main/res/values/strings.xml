@@ -34,4 +34,19 @@
     <string name="title_activity_directory_numbers">Directory Numbers</string>
     <string name="title_activity_view_pager_mess_menu">ViewPagerMessMenuActivity</string>
     <string name="title_activity_view_pager_directory">ViewPagerDirectoryActivity</string>
+
+    <string name="tab_mess_1">Breakfast</string>
+    <string name="tab_mess_2">Lunch</string>
+    <string name="tab_mess_3">Snacks</string>
+    <string name="tab_mess_4">Dinner</string>
+
+    <string-array name="weekday_names">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>

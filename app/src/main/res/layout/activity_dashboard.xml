@@ -99,12 +99,11 @@
                         android:layout_marginTop="5dp"
                         android:backgroundTint="@color/colorCyan"
                         android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
                         android:stateListAnimator="@animator/lift_on_touch"
                         android:elevation="4dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-
+                        android:onClick="startActivityMessMenu"
                         android:translationZ="5dp"
                         card_view:cardCornerRadius="2dp">
                         <ImageView
