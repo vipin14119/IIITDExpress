@@ -1,5 +1,6 @@
 package com.dhcs.vipin.iiitdexpress.faculty;
 
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,14 +11,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dhcs.vipin.iiitdexpress.R;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 public class FacultyActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,4 +72,6 @@ public class FacultyActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class WifiManager {
+    }
 }

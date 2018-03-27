@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/explore_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dhcs.vipin.iiitdexpress.SilencioActivity">
+    android:background="#34495E"
+    tools:context=".silencio.SilencioActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -16,18 +18,134 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="Silencio"/>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_silencio" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/explore_main_card">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:background="@drawable/explore_card_header">
 
-</android.support.design.widget.CoordinatorLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Sound Intensity (dB)"
+                android:id="@+id/sound_label"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"/>
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/play_pause_button"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:onClick="play_pause_handler"
+                android:background="@drawable/ic_play_circle_filled_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Location :"
+                android:id="@+id/location_label"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="20dp"
+                android:layout_below="@+id/sound_label"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/current_location"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/location_label"/>
+            <!--<Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_menu_camera"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:onClick="bind_ip_value_to_location"
+                android:layout_alignBottom="@+id/location_label"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/location_name"
+                android:layout_below="@+id/location_label"
+                android:layout_marginRight="20dp"
+                android:layout_alignStart="@+id/current_location" />-->
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="30dp"
+                android:id="@+id/loud_image"
+                android:background="@drawable/sound_level_1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/press_start"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="60sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:id="@+id/amp"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@+id/loud_image"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="dB"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:id="@+id/textView3"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_below="@+id/amp"
+                android:layout_toRightOf="@+id/loud_image"/>
+
+        </RelativeLayout>
+
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="250dip"
+            android:id="@+id/graph"
+            android:background="#f1eeee"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -52,4 +52,6 @@
     <!-- Notification realted-->
     <string name="Notification">"Notification"</string>
     <!-- -->
+
+    <string name="press_start">0</string>
 </resources>
