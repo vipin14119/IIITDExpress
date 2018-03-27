@@ -4,6 +4,7 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.net.wifi.WifiManager;
@@ -25,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dhcs.vipin.iiitdexpress.R;
+import com.dhcs.vipin.iiitdexpress.directory.ViewPagerDirectoryActivity;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -596,6 +598,11 @@ public class SilencioActivity extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    public void startActivitySoundMap(View view){
+        Intent intent = new Intent(this, SoundMapActivity.class);
+        startActivity(intent);
     }
 
 }

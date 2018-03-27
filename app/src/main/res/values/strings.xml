@@ -54,4 +54,5 @@
     <!-- -->
 
     <string name="press_start">0</string>
+    <string name="title_activity_sound_map">SoundMapActivity</string>
 </resources>

@@ -20,7 +20,17 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:title="Silencio"/>
+            app:title="Silencio">
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="18dp"
+                android:onClick="startActivitySoundMap"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:stateListAnimator="@animator/lift_on_touch"
+                android:background="@drawable/ic_hearing_white_48dp"/>
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
