@@ -49,4 +49,7 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    <!-- Notification realted-->
+    <string name="Notification">"Notification"</string>
+    <!-- -->
 </resources>
