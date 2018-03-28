@@ -9,10 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.dummy.DummyContent.DummyItem;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -28,6 +34,25 @@ public class ListFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    public static Course[] myCourses = {
+            new Course("PS", "monday", "9:00-10:00", "C01"),
+            new Course("PS", "wednesday", "9:30-10:30", "C01"),
+            new Course("PS", "thursday", "9:00-10:00", "C01"),
+            new Course("DSA", "tuesday", "9:30-10:30", "C01"),
+            new Course("DSA", "friday", "10:30-11:30", "C01"),
+            new Course("ADA", "monday", "10:00-11:00", "C21"),
+            new Course("ADA", "wednesday", "9:00-10:00", "C21"),
+            new Course("ADA", "thursday", "12:30-13:30", "C21"),
+            new Course("DBM", "tuesday", "10:00-11:00", "C21"),
+            new Course("DBM", "friday", "10:00-11:00", "C21"),
+            new Course("FW", "tuesday", "11:30-12:30", "C02"),
+            new Course("FW", "thursday", "11:30-12:30", "C02"),
+            new Course("FW", "friday", "11:30-12:30", "C02")
+    };
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -52,6 +77,36 @@ public class ListFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        final Spinner spinner = (Spinner) getActivity().findViewById(R.id.timetable_spinner);
+
+        // Spinner Code
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.custom_spinner_item, getResources().getStringArray(R.array.weekday_names) );
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), spinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                String day = spinner.getSelectedItem().toString().toLowerCase();
+                ArrayList<Course> c = new ArrayList<>();
+                for(int x = 0; x < myCourses.length; x++) {
+                    if(day.equals(myCourses[x].day)) {
+                        c.add(myCourses[x]);
+                    }
+                }
+                Course[] c1 = c.toArray(new Course[c.size()]);
+                mAdapter = new CourseAdapter(c1, mRecyclerView);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override
@@ -59,17 +114,54 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
+
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+//        Course[] myCourses = {
+//                new Course("PS", "monday", "9:00-10:00", "C01"),
+//                new Course("PS", "wednesday", "9:30-10:30", "C01"),
+//                new Course("PS", "thursday", "9:00-10:00", "C01"),
+//                new Course("DSA", "tuesday", "9:30-10:30", "C01"),
+//                new Course("DSA", "friday", "10:30-11:30", "C01"),
+//                new Course("ADA", "monday", "10:00-11:00", "C21"),
+//                new Course("ADA", "wednesday", "9:00-10:00", "C21"),
+//                new Course("ADA", "thursday", "12:30-13:30", "C21"),
+//                new Course("DBM", "tuesday", "10:00-11:00", "C21"),
+//                new Course("DBM", "friday", "10:00-11:00", "C21"),
+//                new Course("FW", "tuesday", "11:30-12:30", "C02"),
+//                new Course("FW", "thursday", "11:30-12:30", "C02"),
+//                new Course("FW", "friday", "11:30-12:30", "C02"),
+//                new Course("ALG", "tuesday", "10:00-11:30", "A006"),
+//                new Course("ALG", "friday", "10:00-11:30", "A006"),
+//                new Course("CV", "monday", "11:30-13:00", "C24"),
+//                new Course("CV", "wednesday", "11:30-13:00", "C24"),
+//                new Course("GDD", "tuesday", "14:30-16:00", "L21"),
+//                new Course("GDD", "friday", "14:30-16:00", "L21"),
+//                new Course("VR", "monday", "14:30-16:00", "C13"),
+//        };
+
+        mAdapter = new CourseAdapter(myCourses, mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
+
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-        }
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+//            }
+//            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+//        }
+
+
+
         return view;
     }
 

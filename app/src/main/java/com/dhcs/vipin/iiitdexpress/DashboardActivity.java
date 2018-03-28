@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.dhcs.vipin.iiitdexpress.directory.ViewPagerDirectoryActivity;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
+import com.dhcs.vipin.iiitdexpress.timetable.TimetableActivity;
 import com.dhcs.vipin.iiitdexpress.timetable.ViewPagerTimeTableActivity;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -26,6 +27,8 @@ public class DashboardActivity extends AppCompatActivity {
     public void startActivityTimeTable(View view){
         Intent intent = new Intent(this, ViewPagerTimeTableActivity.class);
         startActivity(intent);
+//        Intent intent = new Intent(this, TimetableActivity.class);
+//        startActivity(intent);
     }
 
     public void startActivitySilencio(View view){

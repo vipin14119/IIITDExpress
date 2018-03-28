@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".DashboardActivity" />
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -72,8 +71,17 @@
         <activity
             android:name=".directory.ViewPagerDirectoryActivity"
             android:label="@string/title_activity_view_pager_directory"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".MainActivity_Notif"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MainActivity_Notif" />
+        <activity
+            android:name=".timetable.TimetableActivity"
+            android:label="@string/title_activity_timetable"
+            android:parentActivityName=".DashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dhcs.vipin.iiitdexpress.DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>
