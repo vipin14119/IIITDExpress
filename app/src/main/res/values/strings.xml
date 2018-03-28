@@ -49,8 +49,22 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+
+    <string-array name="timetable_names">
+        <item>1st Year(CSE+CSAM)</item>
+        <item>1st Year(CSE+CSD+ITSS)</item>
+        <item>2nd Year(CSE)</item>
+        <item>2nd Year(ECE)</item>
+        <item>2nd Year(CSAM)</item>
+        <item>Btech(3rd,4th),Mtech,PhD</item>
+    </string-array>
     <!-- Notification realted-->
     <string name="Notification">"Notification"</string>
+    <string name="title_activity_faculty2">FacultyActivity2</string>
+    <string name="title_activity_timetable">TimeTable</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- -->
 
     <string name="press_start">0</string>
