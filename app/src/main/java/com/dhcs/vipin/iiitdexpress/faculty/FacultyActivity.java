@@ -52,6 +52,12 @@ public class FacultyActivity extends AppCompatActivity {
 
         ArrayList<FacultyCard> arrayList = new ArrayList<>();
         arrayList.add(new FacultyCard("AV Subramanyam", "Assistant Professor", "PhD(2012), Computer Engineering, Nanyang "));
+        arrayList.add(new FacultyCard("Aasim Khan", "Assistant Professor (SSH)", "PhD in Contemporary India at King's College London"));
+        arrayList.add(new FacultyCard("Alexander Fell(Presently on Leave)", "Assistant Professor (ECE)", "PhD (2012), Indian Institute of Science, Bangalore, India"));
+        arrayList.add(new FacultyCard("Aman Parnami", "Assistant Professor (DES, CSE)", "PhD (2017) Human-Computer Interaction with a minor in Industrial Design, Georgia Institute of Technology."));
+        arrayList.add(new FacultyCard("Amarjeet Singh(Presently on Leave)", "Assistant Professor (CSE, ECE)", "PhD (2009), Electrical Engineering, University of California, Los Angeles, USA"));
+        arrayList.add(new FacultyCard("Anand Srivastava", "Professor (ECE)", "PhD (2003), Indian Institute of Technology Delhi"));
+        arrayList.add(new FacultyCard("Angshul Majumdar", "Assistant Professor (ECE)", "PhD (2012), Electrical & Computer Engg., University of British Columbia"));
         String [] myDataset = {"AV Subramanyam", "Aasim Khan", "Alexander Fell(Presently on Leave)", "Aman Parmani", "Amarjeet Singh(Presently on Leave)", "Anand Srivastava", "Angshul Majumdar", "Anubha Gupta"};
         mAdapter = new FacultyAdapter(arrayList, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
