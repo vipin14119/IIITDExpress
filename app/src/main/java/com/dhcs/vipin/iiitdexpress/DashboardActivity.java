@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.dhcs.vipin.iiitdexpress.directory.ViewPagerDirectoryActivity;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
+import com.dhcs.vipin.iiitdexpress.mess.ViewPagerMessMenuActivity;
 import com.dhcs.vipin.iiitdexpress.silencio.SilencioActivity;
 import com.dhcs.vipin.iiitdexpress.timetable.ViewPagerTimeTableActivity;
 

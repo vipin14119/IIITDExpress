@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.dhcs.vipin.iiitdexpress.ViewPagerMessMenuActivity">
+    tools:context="com.dhcs.vipin.iiitdexpress.mess.ViewPagerMessMenuActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -70,6 +70,8 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 

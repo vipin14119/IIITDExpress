@@ -19,6 +19,8 @@ import com.dhcs.vipin.iiitdexpress.R;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.ArrayList;
+
 public class FacultyActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
@@ -48,8 +50,10 @@ public class FacultyActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        String [] myDataset = {"Vipin", "Monu", "Manish"};
-        mAdapter = new FacultyAdapter(myDataset, mRecyclerView);
+        ArrayList<FacultyCard> arrayList = new ArrayList<>();
+        arrayList.add(new FacultyCard("AV Subramanyam", "Assistant Professor", "PhD(2012), Computer Engineering, Nanyang "));
+        String [] myDataset = {"AV Subramanyam", "Aasim Khan", "Alexander Fell(Presently on Leave)", "Aman Parmani", "Amarjeet Singh(Presently on Leave)", "Anand Srivastava", "Angshul Majumdar", "Anubha Gupta"};
+        mAdapter = new FacultyAdapter(arrayList, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

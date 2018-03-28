@@ -28,13 +28,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/faculty_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vipin Chaudhary"
                     android:textSize="18dp" />
 
                 <TextView
+                    android:id="@+id/faculty_desg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Assistant Professor"
@@ -64,8 +65,10 @@
                 android:background="@color/colorDullGray" />
 
             <TextView
+                android:id="@+id/faculty_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:text="Big text Big text Big text Big text Big text Big text Big text Big text Big text Big text Big text Big text Big text Big text Big text " />
 
             <LinearLayout
@@ -77,20 +80,15 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:text="Mail" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="+91 3223232323" />
+                    android:layout_weight="3"
+                    android:text="+91 9854128743" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="More" />
             </LinearLayout>
         </LinearLayout>
 
