@@ -81,16 +81,6 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
-                AddCourseDialog f = AddCourseDialog.newInstance();
-                f.show(fm, "fragment_edit_name");
-                ;
-            }
-        });
 
         final Spinner spinner = (Spinner) findViewById(R.id.timetable_spinner);
         // Create the adapter that will return a fragment for each of the three
@@ -172,8 +162,10 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Snackbar.make(view, "Add new subject", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    AddCourseDialog f = AddCourseDialog.newInstance("string");
+                    f.show(fm, "fragment_edit_name");
+                    ;
                 }
             });
 
