@@ -188,8 +188,10 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Snackbar.make(view, "Add new subject", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    AddCourseDialog f = AddCourseDialog.newInstance("string");
+                    f.show(fm, "fragment_edit_name");
+                    ;
                 }
             });
 
