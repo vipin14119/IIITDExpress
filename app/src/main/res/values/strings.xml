@@ -66,4 +66,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- -->
+
+    <string name="press_start">0</string>
+    <string name="title_activity_sound_map">SoundMapActivity</string>
 </resources>

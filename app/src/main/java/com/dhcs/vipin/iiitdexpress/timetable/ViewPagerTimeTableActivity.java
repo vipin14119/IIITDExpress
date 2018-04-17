@@ -83,6 +83,22 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // add back arrow to toolbar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FragmentManager fm = getSupportFragmentManager();
+//                AddCourseDialog f = AddCourseDialog.newInstance();
+//                f.show(fm, "fragment_edit_name");
+//                ;
+//            }
+//        });
+
         final Spinner spinner = (Spinner) findViewById(R.id.timetable_spinner);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -125,6 +141,16 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**

@@ -1,14 +1,28 @@
 package com.dhcs.vipin.iiitdexpress.faculty;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dhcs.vipin.iiitdexpress.R;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 //import com.github.aakira.expandablelayout.ExpandableLinearLayout;
 
 /**
@@ -20,9 +34,13 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHold
     private int mExpandedPosition = -1;
     private RecyclerView recyclerView;
 
+
+
+    private ArrayList<FacultyCard> facultyList;
+
     // Provide a suitable constructor (depends on the kind of dataset)
-    public FacultyAdapter(String[] myDataset, RecyclerView r) {
-        this.mDataset = myDataset;
+    public FacultyAdapter(ArrayList<FacultyCard> myDataset, RecyclerView r) {
+        this.facultyList = myDataset;
         this.recyclerView = r;
     }
 
@@ -32,13 +50,18 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
+        public TextView mTextViewDesg;
+        public TextView mTextViewDesc;
+
         public CardView mCardView;
         public View mDetails;
 //        public ExpandableLinearLayout expandableLinearLayout;
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.name);
+            mTextView = (TextView) v.findViewById(R.id.faculty_name);
+            mTextViewDesg = (TextView) v.findViewById(R.id.faculty_desg);
+            mTextViewDesc = (TextView) v.findViewById(R.id.faculty_desc);
 //            mCardView = (CardView) v.findViewById(R.id.faculty_card);
             mDetails = (View) v.findViewById(R.id.mDetails);
 //            expandableLinearLayout = (ExpandableLinearLayout) v.findViewById(R.id.expandableLayout);
@@ -59,7 +82,12 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        holder.mTextView.setText(mDataset[position]);
+        FacultyCard facultyCard = facultyList.get(position);
+//        holder.mTextView.setText(mDataset[position]);
+        holder.mTextView.setText(facultyCard.name);
+        holder.mTextViewDesg.setText(facultyCard.desig);
+        holder.mTextViewDesc.setText(facultyCard.desc);
+
         final boolean isExpanded = position == mExpandedPosition;
         holder.mDetails.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.mTextView.setActivated(isExpanded);
@@ -81,6 +109,8 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHold
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return facultyList.size();
     }
+
+
 }

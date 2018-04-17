@@ -37,7 +37,7 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.View
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.name);
+            mTextView = (TextView) v.findViewById(R.id.faculty_name);
 //            mCardView = (CardView) v.findViewById(R.id.faculty_card);
             mDetails = (View) v.findViewById(R.id.mDetails);
 //            expandableLinearLayout = (ExpandableLinearLayout) v.findViewById(R.id.expandableLayout);

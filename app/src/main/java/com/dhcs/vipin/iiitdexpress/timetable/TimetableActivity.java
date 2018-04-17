@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dhcs.vipin.iiitdexpress.R;
-import com.dhcs.vipin.iiitdexpress.ViewPagerMessMenuActivity;
 import com.github.chrisbanes.photoview.PhotoView;
 
 public class TimetableActivity extends AppCompatActivity {
