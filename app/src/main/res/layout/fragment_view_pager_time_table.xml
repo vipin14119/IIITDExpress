@@ -10,14 +10,17 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:paddingBottom="48dp"
+        android:clipToPadding="false"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/icon_call" />
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="65dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/icon_call"
+        app:fabSize="normal" />
 
 </FrameLayout>

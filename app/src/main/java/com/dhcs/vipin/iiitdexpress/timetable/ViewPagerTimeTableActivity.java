@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyAdapter;
 import com.dhcs.vipin.iiitdexpress.timetable.ListFragment;
@@ -165,7 +166,6 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     AddCourseDialog f = AddCourseDialog.newInstance("string");
                     f.show(fm, "fragment_edit_name");
-                    ;
                 }
             });
 

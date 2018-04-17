@@ -39,9 +39,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.code);
-            mTextView1 = (TextView) v.findViewById(R.id.time);
-            mTextView2 = (TextView) v.findViewById(R.id.room);
+            mTextView = (TextView) v.findViewById(R.id.TV_code);
+            mTextView1 = (TextView) v.findViewById(R.id.TV_time);
+            mTextView2 = (TextView) v.findViewById(R.id.TV_room);
         }
     }
 
