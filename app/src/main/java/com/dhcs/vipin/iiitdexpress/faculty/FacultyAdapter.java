@@ -1,8 +1,11 @@
 package com.dhcs.vipin.iiitdexpress.faculty;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,15 @@ import android.widget.TextView;
 
 import com.dhcs.vipin.iiitdexpress.R;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 //import com.github.aakira.expandablelayout.ExpandableLinearLayout;
 
@@ -21,6 +33,8 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHold
     private String[] mDataset;
     private int mExpandedPosition = -1;
     private RecyclerView recyclerView;
+
+
 
     private ArrayList<FacultyCard> facultyList;
 
@@ -97,4 +111,6 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHold
     public int getItemCount() {
         return facultyList.size();
     }
+
+
 }

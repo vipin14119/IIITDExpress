@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dhcs.vipin.iiitdexpress.R;
+import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
 import com.dhcs.vipin.iiitdexpress.mess.dummy.DummyContent;
 
 import org.json.JSONArray;
@@ -57,12 +59,18 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
     private ProgressDialog mDialog;
     public static HashMap<String, JSONObject> hashMap = new HashMap<>();
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private static final String LEADERBOARD_URL = "http://192.168.55.36/"+"get_mess_menu";
+    private static final String LEADERBOARD_URL = "http://192.168.32.130/"+"get_mess_menu";
+
+
+    public static JSONObject MESS_MENU;
+    public static String SELECTED_DAY;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    public static String MESS_URL = "http://192.168.32.130/get_mess_menu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +109,8 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(ViewPagerMessMenuActivity.this, spinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                SELECTED_DAY = spinner.getSelectedItem().toString();
+                mViewPager.getAdapter().notifyDataSetChanged();
             }
 
             @Override
@@ -110,7 +119,20 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
             }
         });
 
+        String username = "vipin14119";
+        String password = "vipin14119";
+        try{
+            String encodedUrl = "&username=" + URLEncoder.encode(username, "UTF-8") +
+                    "&password=" + URLEncoder.encode(password, "UTF-8");
+            new MessMenuJsonTask().execute(encodedUrl);
+        }
+        catch (Exception e){
+            Log.d("DEBUG", "Some error occured in starting Async Task");
+            e.printStackTrace();
+        }
+
 //        new FetchLeaderBoard().execute();
+//        new MessMenuJsonTask().execute();
     }
 
     @Override
@@ -122,28 +144,6 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_view_pager_mess_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -187,6 +187,11 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+        }
+
+        @Override
+        public int getItemPosition(Object object){
+            return POSITION_NONE;
         }
 
         @Override
@@ -236,80 +241,64 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
         }
     }
 
-    public static String getResponseString(String request_url, String parameter) throws IOException {
+    class MessMenuJsonTask extends AsyncTask<String, Void, String> {
 
-        String JsonResponse = null;
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
 
-        URL url = new URL(request_url);
-        urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setDoOutput(true);
-        urlConnection.setDoInput(true);
-        urlConnection.setConnectTimeout(5000);
-        // is output buffer writter
-        urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        urlConnection.setRequestProperty("Accept", "application/x-www-form-urlencoded");
-        Writer writer = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));
-        writer.write(parameter);
-        writer.close();
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            String parameter = strings[0];
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            try {
 
-        int res_code = urlConnection.getResponseCode();
-//        printDebugMsg("Response Code = "+res_code);
+                URL url = new URL(MESS_URL);
 
-        switch (res_code) {
-            case 200:
-                // aage ja mere sher
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setDoInput(true);
+
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                urlConnection.setRequestProperty("Accept", "application/x-www-form-urlencoded");
+
+                Writer writer = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));
+                writer.write(parameter);
+                writer.close();
+                int response_code = urlConnection.getResponseCode();
+                Log.d("DEBUGGER", "****************** RESPONSE CODE = "+response_code);
+
                 InputStream inputStream = urlConnection.getInputStream();
                 StringBuffer buffer = new StringBuffer();
                 if (inputStream == null) {
-                    // Nothing to do.
                     return null;
                 }
+
                 reader = new BufferedReader(new InputStreamReader(inputStream));
                 String inputLine;
                 while ((inputLine = reader.readLine()) != null)
-                    buffer.append(inputLine + "\n");
+                    buffer.append(inputLine);
                 if (buffer.length() == 0) {
                     // Stream was empty. No point in parsing.
                     return null;
                 }
-                JsonResponse = buffer.toString();
-                break;
-            case 404:
-                // page not found error
-                break;
-            case 500:
-                // server error
-                break;
-            default:
-                //any fucking error
-                break;
-        }
-        urlConnection.disconnect();
-        if (reader != null) {
-            try {
-                reader.close();
-            } catch (final IOException e) {
-//                printErrorMsg("Get IO Error in Challenge Overview task\n"+e);
-            }
-        }
-        return JsonResponse;
-
-    }
-
-    class FetchLeaderBoard extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... strings)
-        {
-            try {
-                String parameter = "&username=" + URLEncoder.encode("vipin", "UTF-8") +
-                        "&password=" + URLEncoder.encode("pass1234", "UTF-8");
-                return getResponseString(LEADERBOARD_URL, parameter);
-
+                String return_value = buffer.toString();
+                Log.d("DEBUG", return_value);
+                return return_value;
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+            finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final IOException e) {
+                        Log.e("TAG RESPONSE", "Error closing stream", e);
+                    }
+                }
             }
             return null;
         }
@@ -318,63 +307,28 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mDialog = new ProgressDialog(ViewPagerMessMenuActivity.this);
-            mDialog.setMessage("Hold on , just fetching Top 20 students");
+            mDialog.setMessage("Fetching Mess data");
             mDialog.show();
         }
-
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (s!=null){
-                try{
-                    JSONObject jsonObject = new JSONObject(s);
-                    JSONObject jsonObject1 = jsonObject.getJSONObject("data");
-                    Iterator keysToIterator = jsonObject1.keys();
-                    while (keysToIterator.hasNext()){
-                        String key = (String) keysToIterator.next();
-                        hashMap.put(key, jsonObject1.getJSONObject(key));
-                    }
-
-//                    JSONArray jsonArray = new JSONArray(s);
-//                    ArrayList<DummyContent.MessItem> localList = new ArrayList<>();
-//                    for (int i=0;i<jsonArray.length();i++){
-//                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                        localList.add(new DummyContent.MessItem(jsonObject.getString("username"), jsonObject.getInt("rank"), (float)jsonObject.getDouble("score"), jsonObject.getString("profile")));
-//                    }
-//                    leaderBoardArrayList = localList;
-//                    printInfoMsg("Got leader board correctly");
-//                    leaderBoardAdapter = new LeaderBoardAdapter(leaderBoardArrayList);
-//                    recyclerView.setAdapter(leaderBoardAdapter);
-                    mDialog.dismiss();
-                }
-                catch (Exception e){
-                    new AlertDialog.Builder(ViewPagerMessMenuActivity.this)
-                            .setTitle("Leaderboard activity error")
-                            .setMessage("There was some error in server please try again later")
-                            .setPositiveButton(android.R.string.ok,  new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            })
-                            .setCancelable(false)
-                            .setIcon(R.drawable.ic_bug_report_black_24dp)
-                            .show();
-                }
-            }
-            else{
-                new AlertDialog.Builder(ViewPagerMessMenuActivity.this)
-                        .setTitle("Leaderboard activity error")
-                        .setMessage("There was some error in server please try again later")
-                        .setPositiveButton(android.R.string.ok,  new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .setCancelable(false)
-                        .setIcon(R.drawable.ic_bug_report_black_24dp)
-                        .show();
-            }
+            Log.d("DEBUG", s);
+            handleMessJsonData(s);
+            mDialog.dismiss();
         }
+    }
+
+    void handleMessJsonData(String s){
+        try{
+            JSONObject raw = new JSONObject(s);
+            MESS_MENU = raw.getJSONObject("data");
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

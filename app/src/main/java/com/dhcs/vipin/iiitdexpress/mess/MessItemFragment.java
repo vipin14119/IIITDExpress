@@ -14,6 +14,9 @@ import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.mess.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.mess.dummy.DummyContent.DummyItem;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,18 +78,38 @@ public class MessItemFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            if(type.equals("breakfast")){
-                recyclerView.setAdapter(new MessItemRecyclerViewAdapter(DummyContent.BREAKFAST_ITEMS, mListener));
+            try{
+                JSONArray list = null;
+                ArrayList<DummyContent.MessItem> menu = new ArrayList<>();
+                if(type.equals("breakfast")){
+                    list = ViewPagerMessMenuActivity.MESS_MENU.getJSONObject(ViewPagerMessMenuActivity.SELECTED_DAY).getJSONArray("breakfast");
+
+                }
+                else if(type.equals("lunch")){
+
+                    list = ViewPagerMessMenuActivity.MESS_MENU.getJSONObject(ViewPagerMessMenuActivity.SELECTED_DAY).getJSONArray("lunch");
+
+//                    recyclerView.setAdapter(new MessItemRecyclerViewAdapter(DummyContent.LUNCH_ITEMS, mListener));
+                }
+                else if(type.equals("snack")){
+                    list = ViewPagerMessMenuActivity.MESS_MENU.getJSONObject(ViewPagerMessMenuActivity.SELECTED_DAY).getJSONArray("snack");
+//                    recyclerView.setAdapter(new MessItemRecyclerViewAdapter(DummyContent.SNACK_ITEMS, mListener));
+                }
+                else if(type.equals("dinner")){
+                    list = ViewPagerMessMenuActivity.MESS_MENU.getJSONObject(ViewPagerMessMenuActivity.SELECTED_DAY).getJSONArray("dinner");
+//                    recyclerView.setAdapter(new MessItemRecyclerViewAdapter(DummyContent.DINNER_ITEMS, mListener));
+                }
+
+                for(int i=0;i<list.length();i++){
+                    menu.add(new DummyContent.MessItem(list.getString(i)));
+                }
+
+                recyclerView.setAdapter(new MessItemRecyclerViewAdapter(menu, mListener));
             }
-            else if(type.equals("lunch")){
-                recyclerView.setAdapter(new MessItemRecyclerViewAdapter(DummyContent.LUNCH_ITEMS, mListener));
+            catch (Exception e){
+                e.printStackTrace();
             }
-            else if(type.equals("snack")){
-                recyclerView.setAdapter(new MessItemRecyclerViewAdapter(DummyContent.SNACK_ITEMS, mListener));
-            }
-            else if(type.equals("dinner")){
-                recyclerView.setAdapter(new MessItemRecyclerViewAdapter(DummyContent.DINNER_ITEMS, mListener));
-            }
+
 
         }
         return view;
