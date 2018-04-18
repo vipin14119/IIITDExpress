@@ -55,6 +55,7 @@ public class DummyContent {
      */
     public static class DummyItem {
         public final String id;
+
         public final String content;
         public final String details;
 
@@ -67,6 +68,20 @@ public class DummyContent {
         @Override
         public String toString() {
             return content;
+        }
+    }
+
+    public static class PersonItem {
+        public final String name;
+        public final String designation;
+        public final String room;
+        public final String email;
+
+        public PersonItem(String name, String designation, String room, String email) {
+            this.name = name;
+            this.designation = designation;
+            this.room = room;
+            this.email = email;
         }
     }
 }

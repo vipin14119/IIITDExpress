@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.directory.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.directory.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,8 +24,9 @@ public class DirectoryListFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 2;
+    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private String type;
 
     public DirectoryListFragment() {
     }
@@ -44,7 +47,9 @@ public class DirectoryListFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            type = getArguments().getString("type");
         }
+        Log.d("DEBUG", "OnCreate");
     }
 
     @Override
@@ -61,7 +66,13 @@ public class DirectoryListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyPersonRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            Log.d("DEBUG", "YES I CAME HERE ********* with "+type);
+            Log.d("DEBUG", ViewPagerDirectoryActivity.DIRECTORY_MAP.toString());
+            ArrayList<DummyContent.PersonItem> arrayList = ViewPagerDirectoryActivity.DIRECTORY_MAP.get(type);
+            MyPersonRecyclerViewAdapter adapter = new MyPersonRecyclerViewAdapter(arrayList, mListener);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
         }
         return view;
     }
@@ -70,6 +81,7 @@ public class DirectoryListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Log.d("DEBUG", "I came here");
 //        if (context instanceof OnListFragmentInteractionListener) {
 //            mListener = (OnListFragmentInteractionListener) context;
 //        } else {
@@ -86,6 +98,6 @@ public class DirectoryListFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(DummyContent.PersonItem item);
     }
 }

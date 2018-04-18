@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.directory.DirectoryListFragment.OnListFragmentInteractionListener;
+import com.dhcs.vipin.iiitdexpress.directory.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.directory.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -19,10 +20,10 @@ import java.util.List;
  */
 public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<DummyContent.PersonItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyPersonRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyPersonRecyclerViewAdapter(List<DummyContent.PersonItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,8 +38,8 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).name);
+        holder.mContentView.setText(mValues.get(position).designation);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +62,7 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public DummyContent.PersonItem mItem;
 
         public ViewHolder(View view) {
             super(view);
