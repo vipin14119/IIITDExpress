@@ -109,6 +109,7 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
         }
 
         try {
+            allCourses.clear();
             new GetAllCoursesTask().execute(mainObject.toString()).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
