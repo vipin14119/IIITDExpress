@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.dhcs.vipin.iiitdexpress.directory.ViewPagerDirectoryActivity;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
@@ -15,10 +20,16 @@ import com.dhcs.vipin.iiitdexpress.mess.ViewPagerMessMenuActivity;
 import com.dhcs.vipin.iiitdexpress.silencio.SilencioActivity;
 import com.dhcs.vipin.iiitdexpress.timetable.Course;
 import com.dhcs.vipin.iiitdexpress.timetable.ViewPagerTimeTableActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,15 +40,72 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    GoogleSignInClient mGoogleSignInClient;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        toolbar = (Toolbar)findViewById(R.id.dashboard_toolbar);
+        setSupportActionBar(toolbar);
+
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        TextView mDate = (TextView)findViewById(R.id.today_date);
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        String current_day;
+        current_day = calendar.get(Calendar.DATE)+" "+calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())+" "+ calendar.get(Calendar.YEAR);
+//        Log.d("DEBUG", calendar.get(Calendar.YEAR)+"");
+        mDate.setText(current_day);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.navigation, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.navigation_logout) {
+//            Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            signOut();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
     }
 
     public void startActivityMessMenu(View view) {
@@ -126,6 +194,13 @@ public class DashboardActivity extends AppCompatActivity {
         } catch (Exception e) {
             return new Intent(Intent.ACTION_VIEW, Uri.parse("http://odyssey.iiitd.edu.in/"));
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        // code here to show dialog
+//        super.onBackPressed();  // optional depending on your needs
     }
 
 }
