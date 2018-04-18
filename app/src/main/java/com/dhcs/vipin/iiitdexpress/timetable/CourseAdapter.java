@@ -35,6 +35,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         public TextView mTextView;
         public TextView mTextView1;
         public TextView mTextView2;
+        public TextView mTextView3;
 //        public ExpandableLinearLayout expandableLinearLayout;
 
         public ViewHolder(View v) {
@@ -42,6 +43,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             mTextView = (TextView) v.findViewById(R.id.TV_code);
             mTextView1 = (TextView) v.findViewById(R.id.TV_time);
             mTextView2 = (TextView) v.findViewById(R.id.TV_room);
+            mTextView3 = (TextView) v.findViewById(R.id.TV_name);
         }
     }
 
@@ -61,6 +63,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         holder.mTextView.setText(mDataset[position].getCode());
         holder.mTextView1.setText(mDataset[position].getTime());
         holder.mTextView2.setText(mDataset[position].getRoom());
+        holder.mTextView3.setText(mDataset[position].getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

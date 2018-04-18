@@ -16,7 +16,10 @@ import com.dhcs.vipin.iiitdexpress.directory.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.directory.dummy.DummyContent.DummyItem;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class DirectoryListFragment extends Fragment {
@@ -68,6 +71,13 @@ public class DirectoryListFragment extends Fragment {
             }
             Log.d("DEBUG", "YES I CAME HERE ********* with "+type);
             Log.d("DEBUG", ViewPagerDirectoryActivity.DIRECTORY_MAP.toString());
+            Set set = ViewPagerDirectoryActivity.DIRECTORY_MAP.entrySet();
+            Iterator iterator = set.iterator();
+            while(iterator.hasNext()) {
+                Map.Entry mentry = (Map.Entry)iterator.next();
+                System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
+                System.out.println(mentry.getValue());
+            }
             ArrayList<DummyContent.PersonItem> arrayList = ViewPagerDirectoryActivity.DIRECTORY_MAP.get(type);
             MyPersonRecyclerViewAdapter adapter = new MyPersonRecyclerViewAdapter(arrayList, mListener);
             recyclerView.setAdapter(adapter);

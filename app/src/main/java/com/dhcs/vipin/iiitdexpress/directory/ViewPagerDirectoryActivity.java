@@ -54,6 +54,7 @@ public class ViewPagerDirectoryActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     public static HashMap<String, ArrayList<DummyContent.PersonItem>> DIRECTORY_MAP = new HashMap<>();
+    public static JSONObject XYZ;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -184,11 +185,17 @@ public class ViewPagerDirectoryActivity extends AppCompatActivity {
         }
 
         @Override
+        public int getItemPosition(Object object){
+            return POSITION_NONE;
+        }
+
+        @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             DirectoryListFragment f;
             Bundle args;
+            Log.d("TEST", "in getItem");
             if (position == 0) {
                 f = new DirectoryListFragment();
                 // Supply index input as an argument.
@@ -302,6 +309,7 @@ public class ViewPagerDirectoryActivity extends AppCompatActivity {
             Log.d("DEBUG", s);
             handleDirectoryJsonData(s);
             mDialog.dismiss();
+            mViewPager.getAdapter().notifyDataSetChanged();
         }
     }
 
