@@ -1,22 +1,28 @@
 package com.dhcs.vipin.iiitdexpress.timetable;
 
+import java.io.Serializable;
+
 /**
  * Created by Pulkit on 3/28/2018.
  */
 
-public class Course {
+public class Course implements Serializable {
     String code;
+    String name;
     String time;
     String day;
     String room;
+    boolean isAdded;
 
     public Course(){};
 
-    public Course(String code,String day, String time, String room) {
+    public Course(String code, String name, String day, String time, String room, boolean isAdded) {
         this.code = code;
+        this.name = name;
         this.time = time;
         this.day = day;
         this.room = room;
+        this.isAdded = isAdded;
     }
 
     public String getCode() {
@@ -49,5 +55,21 @@ public class Course {
 
     public void setRoom(String room) {
         this.room = room;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isAdded() {
+        return isAdded;
+    }
+
+    public void setAdded(boolean added) {
+        isAdded = added;
     }
 }

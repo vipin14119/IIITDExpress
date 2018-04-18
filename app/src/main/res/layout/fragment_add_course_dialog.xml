@@ -9,7 +9,7 @@
     tools:context="com.dhcs.vipin.iiitdexpress.timetable.AddCourseDialog">
 
         <AutoCompleteTextView
-            android:id="@+id/searchtext"
+            android:id="@+id/ACTV_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search Course"

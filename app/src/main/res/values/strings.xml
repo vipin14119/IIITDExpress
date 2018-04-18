@@ -69,4 +69,12 @@
 
     <string name="press_start">0</string>
     <string name="title_activity_sound_map">SoundMapActivity</string>
+
+    <!-- IP -->
+    <string name="get_all_courses">http://18.188.28.89/get_all_courses</string>
+    <string name="get_my_courses">http://18.188.28.89/get_my_courses</string>
+    <string name="get_course_slots">http://18.188.28.89/get_course_slots</string>
+    <string name="add_course">http://18.188.28.89/add_course</string>
+    <string name="get_mess_menu">http://18.188.28.89/get_mess_menu</string>
+
 </resources>

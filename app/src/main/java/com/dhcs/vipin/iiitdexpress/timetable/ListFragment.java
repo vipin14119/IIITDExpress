@@ -1,6 +1,7 @@
 package com.dhcs.vipin.iiitdexpress.timetable;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,21 @@ import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.dummy.DummyContent.DummyItem;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * A fragment representing a list of Items.
@@ -37,25 +53,12 @@ public class ListFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private static RecyclerView mRecyclerView;
+    private static RecyclerView.Adapter mAdapter;
+    private static RecyclerView.LayoutManager mLayoutManager;
 
-    public static Course[] myCourses = {
-            new Course("PS", "monday", "9:00-10:00", "C01"),
-            new Course("PS", "wednesday", "9:30-10:30", "C01"),
-            new Course("PS", "thursday", "9:00-10:00", "C01"),
-            new Course("DSA", "tuesday", "9:30-10:30", "C01"),
-            new Course("DSA", "friday", "10:30-11:30", "C01"),
-            new Course("ADA", "monday", "10:00-11:00", "C21"),
-            new Course("ADA", "wednesday", "9:00-10:00", "C21"),
-            new Course("ADA", "thursday", "12:30-13:30", "C21"),
-            new Course("DBM", "tuesday", "10:00-11:00", "C21"),
-            new Course("DBM", "friday", "10:00-11:00", "C21"),
-            new Course("FW", "tuesday", "11:30-12:30", "C02"),
-            new Course("FW", "thursday", "11:30-12:30", "C02"),
-            new Course("FW", "friday", "11:30-12:30", "C02")
-    };
+    public static ArrayList<Course> dayCourses;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -83,10 +86,9 @@ public class ListFragment extends Fragment {
 
         final Spinner spinner = (Spinner) getActivity().findViewById(R.id.timetable_spinner);
 
-
+        dayCourses = new ArrayList<Course>();
 
         // Spinner Code
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.custom_spinner_item, getResources().getStringArray(R.array.weekday_names) );
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
@@ -94,17 +96,27 @@ public class ListFragment extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), spinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                String day = spinner.getSelectedItem().toString().toLowerCase();
-                ArrayList<Course> c = new ArrayList<>();
-                for(int x = 0; x < myCourses.length; x++) {
-                    if(day.equals(myCourses[x].day)) {
-                        c.add(myCourses[x]);
-                    }
+                String s = spinner.getSelectedItem().toString();
+                Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+                String day = s.substring(0, Math.min(s.length(), 3)).toUpperCase();
+                Log.d("Day : ", day);
+                final JSONObject mainObject = new JSONObject();
+                try {
+                    mainObject.put("username", "admin");
+                    mainObject.put("password", "pass1234");
+                    mainObject.put("day", day);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                Course[] c1 = c.toArray(new Course[c.size()]);
-                mAdapter = new CourseAdapter(c1, mRecyclerView);
-                mRecyclerView.setAdapter(mAdapter);
+
+                try {
+                    dayCourses.clear();
+                    new GetDayCoursesTask().execute(mainObject.toString()).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -112,6 +124,8 @@ public class ListFragment extends Fragment {
 
             }
         });
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
     }
 
     @Override
@@ -119,55 +133,17 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
-
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-//        Course[] myCourses = {
-//                new Course("PS", "monday", "9:00-10:00", "C01"),
-//                new Course("PS", "wednesday", "9:30-10:30", "C01"),
-//                new Course("PS", "thursday", "9:00-10:00", "C01"),
-//                new Course("DSA", "tuesday", "9:30-10:30", "C01"),
-//                new Course("DSA", "friday", "10:30-11:30", "C01"),
-//                new Course("ADA", "monday", "10:00-11:00", "C21"),
-//                new Course("ADA", "wednesday", "9:00-10:00", "C21"),
-//                new Course("ADA", "thursday", "12:30-13:30", "C21"),
-//                new Course("DBM", "tuesday", "10:00-11:00", "C21"),
-//                new Course("DBM", "friday", "10:00-11:00", "C21"),
-//                new Course("FW", "tuesday", "11:30-12:30", "C02"),
-//                new Course("FW", "thursday", "11:30-12:30", "C02"),
-//                new Course("FW", "friday", "11:30-12:30", "C02"),
-//                new Course("ALG", "tuesday", "10:00-11:30", "A006"),
-//                new Course("ALG", "friday", "10:00-11:30", "A006"),
-//                new Course("CV", "monday", "11:30-13:00", "C24"),
-//                new Course("CV", "wednesday", "11:30-13:00", "C24"),
-//                new Course("GDD", "tuesday", "14:30-16:00", "L21"),
-//                new Course("GDD", "friday", "14:30-16:00", "L21"),
-//                new Course("VR", "monday", "14:30-16:00", "C13"),
-//        };
-
-        mAdapter = new CourseAdapter(myCourses, mRecyclerView);
-        mRecyclerView.setAdapter(mAdapter);
-
-        // Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
-//            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//            }
-//            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-//        }
-
-
-
         return view;
+    }
+
+    public static void fillList1() {
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        Course[] c1 = dayCourses.toArray(new Course[dayCourses.size()]);
+        mAdapter = new CourseAdapter(c1, mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
 
@@ -188,18 +164,68 @@ public class ListFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
+    }
+
+    private static class GetDayCoursesTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                URL url = new URL("http://18.188.28.89/get_day_courses");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                writer.write(params[0]);
+                writer.flush();
+                writer.close();
+                os.close();
+                int responseCode=conn.getResponseCode();
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuffer sb = new StringBuffer("");
+                    String line = "";
+                    while ((line = in.readLine()) != null) {
+                        sb.append(line);
+                        break;
+                    }
+                    in.close();
+                    return sb.toString();
+                }
+                else {
+                    return "false : " + responseCode;
+                }
+            }
+            catch(Exception e){
+                return "Exception: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d("TAG", result);
+            try {
+                JSONObject obj = new JSONObject(result);
+                JSONArray arr = obj.getJSONArray("data");
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject jsonobject = arr.getJSONObject(i);
+                    String code = jsonobject.getString("course");
+                    String name = jsonobject.getString("name");
+                    String room = jsonobject.getString("room");
+                    String st = jsonobject.getString("start_time");
+                    String et = jsonobject.getString("end_time");
+                    dayCourses.add(new Course(code,name,"",st+"-"+et,room,true));
+                    Log.d("Course : ", code + " " + name + " " + room + " " + st + "-" + et);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            ListFragment.fillList1();
+        }
     }
 }
