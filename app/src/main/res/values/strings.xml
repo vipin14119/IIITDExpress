@@ -75,6 +75,11 @@
     <string name="get_my_courses">http://18.188.28.89/get_my_courses</string>
     <string name="get_course_slots">http://18.188.28.89/get_course_slots</string>
     <string name="add_course">http://18.188.28.89/add_course</string>
-    <string name="get_mess_menu">http://18.188.28.89/get_mess_menu</string>
+    <string name="get_mess_menu">get_mess_menu</string>
 
+
+
+    <!--<string name="server_ip">http://18.188.28.89/</string>-->
+    <string name="server_ip">http://192.168.0.4/</string>
+    <string name="get_faculty_json">get_faculty_json</string>
 </resources>

@@ -126,7 +126,8 @@ public class FacultyActivity extends AppCompatActivity {
             BufferedReader reader = null;
             try {
 
-                URL url = new URL(FACULTY_URL);
+                String server_url = getResources().getString(R.string.server_ip) + getResources().getString(R.string.get_faculty_json);
+                URL url = new URL(server_url);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setDoOutput(true);
@@ -194,13 +195,93 @@ public class FacultyActivity extends AppCompatActivity {
     }
 
 
+    class FacultyEmailFetchTask extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            String parameter = strings[0];
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            try {
+
+//                String server_url = getResources().getString(R.string.server_ip) + getResources().getString(R.string.get_faculty_json);
+                URL url = new URL(parameter);
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setDoInput(true);
+
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                urlConnection.setRequestProperty("Accept", "application/x-www-form-urlencoded");
+
+                Writer writer = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));
+                writer.write(parameter);
+                writer.close();
+                int response_code = urlConnection.getResponseCode();
+                Log.d("DEBUGGER", "****************** RESPONSE CODE = "+response_code);
+
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    return null;
+                }
+
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                String inputLine;
+                while ((inputLine = reader.readLine()) != null)
+                    buffer.append(inputLine);
+                if (buffer.length() == 0) {
+                    // Stream was empty. No point in parsing.
+                    return null;
+                }
+                String return_value = buffer.toString();
+                return return_value;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final IOException e) {
+                        Log.e("TAG RESPONSE", "Error closing stream", e);
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            mDialog = new ProgressDialog(FacultyActivity.this);
+//            mDialog.setMessage("Logging you in");
+//            mDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.d("DEBUG", s);
+            handleFacultyJsonData(s);
+//            mDialog.dismiss();
+        }
+    }
+
     void handleFacultyJsonData(String raw){
 //        ArrayList<FacultyCard> arrayList = new ArrayList<>();
         try{
-            JSONArray list = new JSONArray(raw);
+            JSONObject dict = new JSONObject(raw);
+            JSONArray list = dict.getJSONArray("data");
             for(int i=0;i<list.length();i++){
                 JSONObject jsonObject = list.getJSONObject(i);
-                facultyCardArrayList.add(new FacultyCard(jsonObject.getString("name"), jsonObject.getString("designation"), jsonObject.getString("education")));
+                facultyCardArrayList.add(new FacultyCard(jsonObject.getString("name"), jsonObject.getString("designation"), jsonObject.getString("education"), jsonObject.getString("email")));
             }
 
             mRecyclerView.setAdapter(mAdapter);

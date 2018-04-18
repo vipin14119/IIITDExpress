@@ -68,10 +68,10 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
+        android:background="@drawable/food"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="40dp"
-        android:paddingBottom="40dp"
+        android:paddingTop="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 

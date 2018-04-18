@@ -59,7 +59,6 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
     private ProgressDialog mDialog;
     public static HashMap<String, JSONObject> hashMap = new HashMap<>();
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private static final String LEADERBOARD_URL = "http://192.168.32.130/"+"get_mess_menu";
 
 
     public static JSONObject MESS_MENU;
@@ -252,7 +251,8 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
             BufferedReader reader = null;
             try {
 
-                URL url = new URL(MESS_URL);
+                String url_string = getResources().getString(R.string.server_ip) + getResources().getString(R.string.get_mess_menu);
+                URL url = new URL(url_string);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setDoOutput(true);
