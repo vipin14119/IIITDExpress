@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:background="@drawable/bg1">
 
             <TextView
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/bree_serif"
                 android:text="22º C"
                 android:textAlignment="center"
                 android:textColor="#FFF"
@@ -36,15 +36,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/temprature"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bree_serif"
                 android:text="IIIT Delhi"
                 android:textColor="#FFF"
                 android:textSize="18dp" />
 
             <TextView
+                android:id="@+id/today_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/location"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bree_serif"
                 android:text="10 March 2018"
                 android:textColor="#FFF"
                 android:textSize="20dp"
