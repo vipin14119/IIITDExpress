@@ -40,6 +40,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.jaredrummler.android.widget.AnimatedSvgView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +104,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        AnimatedSvgView svgView = (AnimatedSvgView) findViewById(R.id.animated_svg_view);
+        svgView.start();
+
     }
 
     private void signIn() {
@@ -130,6 +134,10 @@ public class LoginActivity extends AppCompatActivity {
             // Signed in successfully, show authenticated UI.
 //            updateUI(account);
             Log.d("DEBUG", "IM DONE NOW " + account.getEmail());
+            String username = account.getEmail();
+            String password = account.getIdToken();
+            Config.USERNAME = username;
+            Config.PASSWORD = password;
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
         } catch (ApiException e) {
@@ -155,20 +163,15 @@ public class LoginActivity extends AppCompatActivity {
         if (account != null) {
             Log.d("DEBUG", "IM ALREADY LOGGED IN");
             Log.d("DEBUG", account.getEmail());
+            String username = account.getEmail();
+            String password = account.getIdToken();
+            Config.USERNAME = username;
+            Config.PASSWORD = password;
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
         }
 //        updateUI(account);
     }
 
-    private void signOut() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        finish();
-                    }
-                });
-    }
 }
 

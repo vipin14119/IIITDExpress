@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dhcs.vipin.iiitdexpress.Config;
 import com.dhcs.vipin.iiitdexpress.R;
 
 import org.json.JSONArray;
@@ -88,8 +89,8 @@ public class FacultyActivity extends AppCompatActivity {
             }
         });
 
-        String username = "vipin14119";
-        String password = "vipin14119";
+        String username = Config.USERNAME;
+        String password = Config.PASSWORD;
         try{
             String encodedUrl = "&username=" + URLEncoder.encode(username, "UTF-8") +
                     "&password=" + URLEncoder.encode(password, "UTF-8");

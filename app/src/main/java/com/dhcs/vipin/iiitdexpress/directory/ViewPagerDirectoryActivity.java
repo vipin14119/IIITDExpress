@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.dhcs.vipin.iiitdexpress.Config;
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.directory.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.mess.ViewPagerMessMenuActivity;
@@ -92,8 +93,8 @@ public class ViewPagerDirectoryActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        String username = "vipin14119";
-        String password = "vipin14119";
+        String username = Config.USERNAME;
+        String password = Config.PASSWORD;
         try{
             String encodedUrl = "&username=" + URLEncoder.encode(username, "UTF-8") +
                     "&password=" + URLEncoder.encode(password, "UTF-8");
