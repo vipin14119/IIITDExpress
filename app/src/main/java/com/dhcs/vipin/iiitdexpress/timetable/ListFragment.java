@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.dhcs.vipin.iiitdexpress.Config;
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.dummy.DummyContent;
 import com.dhcs.vipin.iiitdexpress.dummy.DummyContent.DummyItem;
@@ -102,8 +103,8 @@ public class ListFragment extends Fragment {
                 Log.d("Day : ", day);
                 final JSONObject mainObject = new JSONObject();
                 try {
-                    mainObject.put("username", "admin");
-                    mainObject.put("password", "pass1234");
+                    mainObject.put("username", Config.USERNAME);
+                    mainObject.put("password", Config.PASSWORD);
                     mainObject.put("day", day);
                 } catch (JSONException e) {
                     e.printStackTrace();

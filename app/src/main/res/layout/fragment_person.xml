@@ -29,8 +29,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginEnd="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
@@ -43,16 +44,20 @@
                 android:padding="8dp"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/id"
+                    android:id="@+id/people_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vipin Chaudhary"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/bree_serif"
                     android:textAppearance="?attr/textAppearanceListItem" />
                 <TextView
-                    android:id="@+id/content"
+                    android:id="@+id/people_designation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorCoolGray"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/bree_serif"
                     android:text="GM(Operations)"
                     android:textAppearance="?attr/textAppearanceListItem" />
             </LinearLayout>

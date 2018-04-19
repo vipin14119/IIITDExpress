@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dhcs.vipin.iiitdexpress.Config;
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyActivity;
 import com.dhcs.vipin.iiitdexpress.mess.dummy.DummyContent;
@@ -118,8 +119,8 @@ public class ViewPagerMessMenuActivity extends AppCompatActivity {
             }
         });
 
-        String username = "vipin14119";
-        String password = "vipin14119";
+        String username = Config.USERNAME;
+        String password = Config.PASSWORD;
         try{
             String encodedUrl = "&username=" + URLEncoder.encode(username, "UTF-8") +
                     "&password=" + URLEncoder.encode(password, "UTF-8");

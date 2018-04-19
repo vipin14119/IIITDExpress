@@ -66,12 +66,14 @@ public class DashboardActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         TextView mDate = (TextView)findViewById(R.id.today_date);
+        TextView mWelcome = (TextView)findViewById(R.id.welcome);
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         String current_day;
         current_day = calendar.get(Calendar.DATE)+" "+calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())+" "+ calendar.get(Calendar.YEAR);
 //        Log.d("DEBUG", calendar.get(Calendar.YEAR)+"");
         mDate.setText(current_day);
+        mWelcome.setText(Config.USERNAME);
     }
 
     @Override

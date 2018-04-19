@@ -29,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dhcs.vipin.iiitdexpress.Config;
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.timetable.Course;
 import com.dhcs.vipin.iiitdexpress.timetable.ViewPagerTimeTableActivity;
@@ -95,8 +96,8 @@ public class FacultyActivity extends AppCompatActivity {
 //        mAdapter = new FacultyAdapter(facultyCardArrayList, mRecyclerView);
 //        mRecyclerView.setAdapter(mAdapter);
 
-        String username = "vipin14119";
-        String password = "vipin14119";
+        String username = Config.USERNAME;
+        String password = Config.PASSWORD;
         try{
             String encodedUrl = "&username=" + URLEncoder.encode(username, "UTF-8") +
                     "&password=" + URLEncoder.encode(password, "UTF-8");

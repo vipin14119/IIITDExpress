@@ -46,6 +46,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.dhcs.vipin.iiitdexpress.Config;
 import com.dhcs.vipin.iiitdexpress.DashboardActivity;
 import com.dhcs.vipin.iiitdexpress.R;
 import com.dhcs.vipin.iiitdexpress.faculty.FacultyAdapter;
@@ -102,8 +103,8 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
 
         final JSONObject mainObject = new JSONObject();
         try {
-            mainObject.put("username", "admin");
-            mainObject.put("password", "pass1234");
+            mainObject.put("username", Config.USERNAME);
+            mainObject.put("password", Config.PASSWORD);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -304,8 +305,8 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         final JSONObject mainObject = new JSONObject();
                         try {
-                            mainObject.put("username", "admin");
-                            mainObject.put("password", "pass1234");
+                            mainObject.put("username", Config.USERNAME);
+                            mainObject.put("password", Config.PASSWORD);
                             mainObject.put("code", mIdView.getText().toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -321,8 +322,8 @@ public class ViewPagerTimeTableActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         final JSONObject mainObject = new JSONObject();
                         try {
-                            mainObject.put("username", "admin");
-                            mainObject.put("password", "pass1234");
+                            mainObject.put("username", Config.USERNAME);
+                            mainObject.put("password", Config.PASSWORD);
                             mainObject.put("code", mIdView.getText().toString());
                         } catch (JSONException e) {
                             e.printStackTrace();

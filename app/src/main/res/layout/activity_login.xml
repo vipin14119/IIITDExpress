@@ -2,62 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:weightSum="4"
+    android:background="@color/colorCyan"
     tools:context="com.dhcs.vipin.iiitdexpress.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@color/colorCyan">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <ImageView
+            android:layout_marginTop="30dp"
             android:layout_width="250dp"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_height="200dp"
-            android:layout_marginLeft="60dp"
             android:src="@drawable/logo"/>
+        <TextView
+            android:text="IIITD Express"
+            android:layout_marginTop="20dp"
+            android:textSize="40sp"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.google.android.gms.common.SignInButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/sign_in_button"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:background="@color/colorWhite">
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.google.android.gms.common.SignInButton
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:id="@+id/sign_in_button"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:textColor="@color/colorWhite"
-                android:textSize="18dp"
-                android:backgroundTint="#EF5350"
-                android:onClick="startDashboardActivity"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:text="Guest Login"/>
-        </LinearLayout>
-
-
-
-    </LinearLayout>
 
 </LinearLayout>

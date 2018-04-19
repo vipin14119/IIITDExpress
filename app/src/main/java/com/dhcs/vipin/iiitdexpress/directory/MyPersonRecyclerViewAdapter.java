@@ -67,8 +67,8 @@ public class MyPersonRecyclerViewAdapter extends RecyclerView.Adapter<MyPersonRe
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = (TextView) view.findViewById(R.id.people_name);
+            mContentView = (TextView) view.findViewById(R.id.people_designation);
         }
 
         @Override
