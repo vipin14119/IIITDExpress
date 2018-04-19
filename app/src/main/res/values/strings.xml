@@ -82,6 +82,7 @@
     <!--<string name="server_ip">http://192.168.0.4/</string>-->
     <string name="get_faculty_json">get_faculty_json</string>
     <string name="get_directory_json">get_directory_json</string>
+    <string name="register_user">register_user</string>
 
     <string-array name="phone_call">
         <item d="M0 2560 l0 -2560 2560 0 2560 0 0 2560 0 2560 -2560 0 -2560 0 0
